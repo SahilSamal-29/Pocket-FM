@@ -1,10 +1,11 @@
-package com.example.pocketfm
+package com.example.pocketfm.ui
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.pocketfm.ui.DetailActivity
 import com.example.pocketfm.data.model.AudioItem
 import com.example.pocketfm.databinding.ItemStoryBinding
 

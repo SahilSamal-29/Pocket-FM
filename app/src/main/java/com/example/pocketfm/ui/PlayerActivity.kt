@@ -1,6 +1,5 @@
-package com.example.pocketfm
+package com.example.pocketfm.ui
 
-import android.media.browse.MediaBrowser
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.bumptech.glide.Glide
+import com.example.pocketfm.R
 import com.example.pocketfm.databinding.ActivityPlayerBinding
 
 class PlayerActivity : AppCompatActivity() {
@@ -20,6 +20,7 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayerBinding
     private var player: ExoPlayer? = null
     private val handler = Handler(Looper.getMainLooper())
+    private val SEEK_DURATION = 10_000L  // 10 seconds in ms
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,29 @@ class PlayerActivity : AppCompatActivity() {
         setupPlayer(audioUrl)
         setupControls()
 
+        binding.btnBack.setOnClickListener {
+
+            player?.let {
+                val newPosition = it.currentPosition - SEEK_DURATION
+
+                it.seekTo(
+                    if (newPosition < 0) 0 else newPosition
+                )
+            }
+        }
+
+        binding.btnForward.setOnClickListener {
+
+            player?.let {
+                val newPosition = it.currentPosition + SEEK_DURATION
+
+                val duration = it.duration
+
+                it.seekTo(
+                    if (newPosition > duration) duration else newPosition
+                )
+            }
+        }
     }
 
     private fun setupPlayer(audioUrl: String?) {

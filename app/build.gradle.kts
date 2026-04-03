@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.devtools.ksp")
@@ -25,11 +27,31 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        val apiKey = project.findProperty("LISTEN_API_KEY")?.toString()
+//            ?: throw GradleException("API KEY NOT FOUND")
+//
+//        buildConfigField("String", "API_KEY", "\"$apiKey\"")
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+
+        val apiKey = properties.getProperty("LISTEN_API_KEY") ?: ""
+
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
     }
+//    defaultConfig {
+//
+//        val properties = Properties()
+//        properties.load(project.rootProject.file("local.properties").inputStream())
+//
+//        val apiKey = properties.getProperty("LISTEN_API_KEY") ?: ""
+//
+//        buildConfigField("String", "API_KEY", "\"$apiKey\"")
+//    }
 
     buildFeatures{
         viewBinding = true
-        dataBinding
+        dataBinding = true
+        buildConfig = true
     }
 
     buildTypes {

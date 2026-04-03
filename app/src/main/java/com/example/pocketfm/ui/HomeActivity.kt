@@ -1,16 +1,16 @@
-package com.example.pocketfm
+package com.example.pocketfm.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.pocketfm.ui.DetailActivity
+import com.example.pocketfm.R
 import com.example.pocketfm.databinding.ActivityHomeBinding
 import com.example.pocketfm.viewmodel.AudioViewModel
 

@@ -1,7 +1,7 @@
-package com.example.pocketfm.Repository
+package com.example.pocketfm.repository
 
 import android.util.Log
-import com.example.pocketfm.RetrofitClient
+import com.example.pocketfm.data.remote.RetrofitClient
 import com.example.pocketfm.data.mapper.toAudioItem
 import com.example.pocketfm.data.model.AudioItem
 

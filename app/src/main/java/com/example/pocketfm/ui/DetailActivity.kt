@@ -1,4 +1,4 @@
-package com.example.pocketfm
+package com.example.pocketfm.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.example.pocketfm.R
 import com.example.pocketfm.databinding.ActivityDetailBinding
-import com.example.pocketfm.databinding.ActivityHomeBinding
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding

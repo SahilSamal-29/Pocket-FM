@@ -1,6 +1,5 @@
-package com.example.pocketfm
+package com.example.pocketfm.data.remote
 
-import com.example.pocketfm.data.remote.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

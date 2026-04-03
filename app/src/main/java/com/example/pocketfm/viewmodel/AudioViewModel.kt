@@ -3,7 +3,7 @@ package com.example.pocketfm.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pocketfm.Repository.AudioRepository
+import com.example.pocketfm.repository.AudioRepository
 import com.example.pocketfm.data.model.AudioItem
 import kotlinx.coroutines.launch
 
