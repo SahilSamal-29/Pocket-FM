@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="tvStoryTitle" type="id" />
+    <item name="seekBar" type="id" />
+    <item name="tvTime" type="id" />
+    <item name="btnPlayPause" type="id" />
+</resources>

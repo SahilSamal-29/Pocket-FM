@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "npm": "^11.12.1",
+    "podcast-api": "^2.0.4"
+  }
+}
