@@ -1,3 +1,48 @@
 <resources>
     <string name="app_name">PocketFM</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Welcome Back!</string>
+    <string name="login_subtitle">Sign in to continue listening</string>
+    <string name="label_mobile_number">Mobile Number</string>
+    <string name="hint_mobile_number">Enter mobile number</string>
+    <string name="btn_send_otp">Send OTP</string>
+    <string name="or_continue_with">OR continue with</string>
+    <string name="btn_google_login">Continue with Google</string>
+    <string name="btn_facebook_login">Continue with Facebook</string>
+    <string name="terms_privacy_note">By continuing, you agree to our\nTerms of Service &amp; Privacy Policy</string>
+    <string name="new_user_prompt">New to PocketFM? </string>
+    <string name="sign_up">Sign Up</string>
+
+    <!-- Signup Screen -->
+    <string name="signup_title">Create Account</string>
+    <string name="signup_subtitle">Join millions of listeners today</string>
+    <string name="label_full_name">Full Name</string>
+    <string name="hint_full_name">Enter your full name</string>
+    <string name="label_email">Email Address (Optional)</string>
+    <string name="hint_email">Enter your email address</string>
+    <string name="label_gender">Gender</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_other">Other</string>
+    <string name="or_sign_up_with">OR sign up with</string>
+    <string name="btn_google_signup">Sign up with Google</string>
+    <string name="btn_facebook_signup">Sign up with Facebook</string>
+    <string name="btn_create_account">Create Account &amp; Get OTP</string>
+    <string name="existing_user_prompt">Already have an account? </string>
+    <string name="login">Login</string>
+
+    <!-- OTP Screen -->
+    <string name="otp_title">Verify Your Number</string>
+    <string name="otp_resend_label">Didn\'t receive OTP? </string>
+    <string name="otp_resend">Resend (30s)</string>
+    <string name="btn_verify_otp">Verify &amp; Continue</string>
+
+    <!-- Country Code -->
+    <string name="country_code_india">+91</string>
+
+    <!-- Tagline -->
+    <string name="tagline">India\'s #1 Audio Stories App</string>
+
+    <string name="default_web_client_id" translatable="false">904805252571-e4mltnhks9c7qokdqd69gs3bba9iltf7.apps.googleusercontent.com</string>
 </resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "904805252571",
+    "firebase_url": "https://pocketfm-59135-default-rtdb.firebaseio.com",
+    "project_id": "pocketfm-59135",
+    "storage_bucket": "pocketfm-59135.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904805252571:android:8e2cb101bbf31b6d067bfe",
+        "android_client_info": {
+          "package_name": "com.example.pocketfm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904805252571-e4mltnhks9c7qokdqd69gs3bba9iltf7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pocketfm",
+            "certificate_hash": "409227734e436285f1f2e4f3cab8a33e86aae2be"
+          }
+        },
+        {
+          "client_id": "904805252571-7elaauoau33pa0ksa0jmlo551m5qn49c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVmJ5xHK11bL6Sse2anOfHjMBnJsoiU3o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904805252571-7elaauoau33pa0ksa0jmlo551m5qn49c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
