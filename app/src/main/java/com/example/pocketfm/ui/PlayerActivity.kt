@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.SeekBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackParameters
 import androidx.media3.exoplayer.ExoPlayer
 import com.bumptech.glide.Glide
 import com.example.pocketfm.R
@@ -20,52 +22,50 @@ class PlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayerBinding
     private var player: ExoPlayer? = null
     private val handler = Handler(Looper.getMainLooper())
-    private val SEEK_DURATION = 10_000L  // 10 seconds in ms
+    private val SEEK_DURATION = 10_000L  // 10 seconds
+
+    // Current playback speed
+    private var currentSpeed = 1.0f
+
+    // List of available speeds
+    private val availableSpeeds = listOf(0.5f, 0.75f, 1.0f, 1.25f, 1.5f, 1.75f, 2.0f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityPlayerBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val audioUrl = intent.getStringExtra("audio")
         val title = intent.getStringExtra("title")
         val image = intent.getStringExtra("image")
+
         Glide.with(this)
-            .load(image)   // ✅ NOT item.image
+            .load(image)
+            .fitCenter()
             .into(binding.imgCover)
 
         binding.tvTitle.text = title
 
         setupPlayer(audioUrl)
         setupControls()
+        setupSpeedControls()
 
-        binding.btnBack.setOnClickListener {
 
-            player?.let {
-                val newPosition = it.currentPosition - SEEK_DURATION
+    }
 
-                it.seekTo(
-                    if (newPosition < 0) 0 else newPosition
-                )
-            }
-        }
-
-        binding.btnForward.setOnClickListener {
-
-            player?.let {
-                val newPosition = it.currentPosition + SEEK_DURATION
-
-                val duration = it.duration
-
-                it.seekTo(
-                    if (newPosition > duration) duration else newPosition
-                )
+    private fun updatePlayPauseIcon() {
+        player?.let {
+            if (it.isPlaying) {
+                binding.btnPlayPause.setImageResource(R.drawable.ic_pause)
+            } else {
+                binding.btnPlayPause.setImageResource(R.drawable.ic_play)
             }
         }
     }
@@ -78,24 +78,22 @@ class PlayerActivity : AppCompatActivity() {
         }
 
         player = ExoPlayer.Builder(this).build()
-
         val mediaItem = MediaItem.fromUri(audioUrl)
         player?.setMediaItem(mediaItem)
         player?.prepare()
+        player?.play() // Auto play when opening player
     }
 
     private fun setupControls() {
-
-        // Play/Pause toggle
+        // Play/Pause
         binding.btnPlayPause.setOnClickListener {
-            player?.let {
-                if (it.isPlaying) {
-                    it.pause()
-                    binding.btnPlayPause.text = "Play"
+            player?.let { player ->
+                if (player.isPlaying) {
+                    player.pause()
                 } else {
-                    it.play()
-                    binding.btnPlayPause.text = "Pause"
+                    player.play()
                 }
+                updatePlayPauseIcon()   // Update icon after state change
             }
         }
 
@@ -107,26 +105,18 @@ class PlayerActivity : AppCompatActivity() {
                     val duration = p.duration
 
                     if (duration > 0) {
-                        binding.seekBar.max = duration.toInt()
-                        binding.seekBar.progress = current.toInt()
-
-                        binding.tvTime.text =
-                            "${formatTime(current)} / ${formatTime(duration)}"
+                        binding.seekbar.max = duration.toInt()
+                        binding.seekbar.progress = current.toInt()
+                        binding.tvTime.text = "${formatTime(current)} / ${formatTime(duration)}"
                     }
                 }
                 handler.postDelayed(this, 1000)
             }
         })
 
-        // Seekbar interaction
-        binding.seekBar.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener {
-
-            override fun onProgressChanged(
-                seekBar: SeekBar?,
-                progress: Int,
-                fromUser: Boolean
-            ) {
+        // Seekbar listener
+        binding.seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     player?.seekTo(progress.toLong())
                 }
@@ -135,6 +125,66 @@ class PlayerActivity : AppCompatActivity() {
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
+
+        // Back 10s
+        binding.btnBackward.setOnClickListener {
+            player?.let {
+                val newPosition = it.currentPosition - SEEK_DURATION
+                it.seekTo(if (newPosition < 0) 0 else newPosition)
+            }
+        }
+
+        // Forward 10s
+        binding.btnForward.setOnClickListener {
+            player?.let {
+                val newPosition = it.currentPosition + SEEK_DURATION
+                val duration = it.duration
+                it.seekTo(if (newPosition > duration) duration else newPosition)
+            }
+        }
+    }
+
+    private fun setupSpeedControls() {
+        val speedViews = listOf(
+            binding.tvSpeed05 to 0.5f,
+            binding.tvSpeed075 to 0.75f,
+            binding.tvSpeed1 to 1.0f,
+            binding.tvSpeed125 to 1.25f,
+            binding.tvSpeed15 to 1.5f,
+            binding.tvSpeed175 to 1.75f,
+            binding.tvSpeed2 to 2.0f
+        )
+
+        speedViews.forEach { (textView, speed) ->
+            textView.setOnClickListener {
+                changePlaybackSpeed(speed)
+                updateSpeedUI(speedViews, textView)
+            }
+        }
+
+        // Set initial speed (1x)
+        updateSpeedUI(speedViews, binding.tvSpeed1)
+    }
+
+    private fun changePlaybackSpeed(speed: Float) {
+        currentSpeed = speed
+        player?.playbackParameters = PlaybackParameters(speed)
+    }
+
+    private fun updateSpeedUI(
+        speedViews: List<Pair<TextView, Float>>,
+        selectedView: TextView
+    ) {
+        speedViews.forEach { (view, _) ->
+            if (view == selectedView) {
+                view.background = getDrawable(R.drawable.bg_speed_chip_selected)
+                view.setTextColor(resources.getColor(android.R.color.white, null))
+//                view.setTextStyle(TextView.BOLD)  // or use textStyle="bold" in XML
+            } else {
+                view.background = getDrawable(R.drawable.bg_speed_chip)
+                view.setTextColor(resources.getColor(android.R.color.darker_gray, null)) // or your #888888
+            }
+        }
     }
 
     private fun formatTime(ms: Long): String {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <path
+        android:fillColor="#2C2C2C"
+        android:pathData="M10,10 h100 v100 h-100 z" />
+
+    <!-- Album inner square -->
+    <path
+        android:fillColor="#1E1E1E"
+        android:pathData="M25,25 h70 v70 h-70 z" />
+
+    <!-- Music Note -->
+    <path
+        android:fillColor="#BB86FC"
+        android:pathData="M70,45 L70,75 C70,82 64,88 57,88 C50,88 45,82 45,75 C45,68 50,62 57,62 L70,62 L70,45 Z" />
+
+<!--    <circle-->
+<!--        android:fillColor="#BB86FC"-->
+<!--        android:centerX="57"-->
+<!--        android:centerY="75"-->
+<!--        android:radius="4" />-->
+</vector>
