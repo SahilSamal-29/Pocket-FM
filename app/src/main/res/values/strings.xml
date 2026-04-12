@@ -45,4 +45,6 @@
     <string name="tagline">India\'s #1 Audio Stories App</string>
 
     <string name="default_web_client_id" translatable="false">904805252571-e4mltnhks9c7qokdqd69gs3bba9iltf7.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

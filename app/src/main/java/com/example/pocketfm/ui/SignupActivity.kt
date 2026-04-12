@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isEmpty
 import com.example.pocketfm.databinding.ActivitySignupBinding
-import com.example.pocketfm.ui.HomeActivity
 import com.example.pocketfm.ui.OtpVerifyActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
@@ -162,7 +161,7 @@ class SignupActivity : AppCompatActivity() {
         if (user != null) {
             Log.d("AUTH", "Login Success")
 
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
 
         } else {

@@ -2,6 +2,7 @@ package com.example.pocketfm.ui
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +34,10 @@ class LoginActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        val ivBack = findViewById<ImageView>(R.id.ivBack)
+        ivBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 }

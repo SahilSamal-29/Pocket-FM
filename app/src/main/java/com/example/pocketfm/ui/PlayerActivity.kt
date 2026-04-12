@@ -142,6 +142,9 @@ class PlayerActivity : AppCompatActivity() {
                 it.seekTo(if (newPosition > duration) duration else newPosition)
             }
         }
+        binding.ivBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun setupSpeedControls() {

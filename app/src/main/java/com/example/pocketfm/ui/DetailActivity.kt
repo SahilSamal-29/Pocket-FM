@@ -32,6 +32,9 @@ class DetailActivity : AppCompatActivity() {
 //        binding.imgBack.setOnClickListener {
 //            onBackPressedDispatcher.onBackPressed()
 //        }
+        binding.ivBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
     }
     private fun setupUI() {
 
